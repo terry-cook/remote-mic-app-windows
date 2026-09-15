@@ -61,6 +61,14 @@ jobs:
         if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')
         run: pnpm tauri build --no-bundle
 
+      - name: Verify tag Windows EXE
+        if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')
+        shell: pwsh
+        run: |
+          if (-not (Test-Path -LiteralPath "target/release/sayall-windows-app.exe" -PathType Leaf)) {
+            throw "未找到 target/release/sayall-windows-app.exe"
+          }
+
       - name: Upload Windows EXE artifacts
         if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')
         uses: actions/upload-artifact@v4

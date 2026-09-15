@@ -39,11 +39,14 @@ jobs:
       - name: Build Windows EXE
         run: cargo build --release --manifest-path src-tauri/Cargo.toml --target-dir target
 
+      - name: Build Tauri Windows EXE
+        run: pnpm tauri build --no-bundle
+
       - name: Upload Windows EXE artifacts
         uses: actions/upload-artifact@v4
         with:
           name: windows-exe
-          path: target/release/*.exe
+          path: target/release/sayall-windows-app.exe
           if-no-files-found: error
 
   build-tag:
@@ -76,5 +79,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: windows-exe
-          path: target/release/*.exe
+          path: target/release/sayall-windows-app.exe
           if-no-files-found: error

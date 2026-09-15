@@ -72,6 +72,9 @@ jobs:
       - name: Install frontend dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Build frontend
+        run: pnpm build
+
       - name: Build Windows EXE
         run: pnpm tauri build --no-bundle
 
